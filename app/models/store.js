@@ -1,13 +1,13 @@
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  Product = require('../models/product'),
+  Product = require('./product'),
   bcrypt = require('bcrypt-nodejs'),
   config = require('../../config').config(),
   fs = require('fs'),
   { drop, concat } = require('lodash');
 
 const StoreSchema = new Schema({
-  name: { type: String, required: 'Store name is required.', unique: false, maxlength: [70, 'Store name should have at most 70 characters.'] },,
+  name: { type: String, required: 'Store name is required.', unique: false, maxlength: [70, 'Store name should have at most 70 characters.'] },
   community: { type: Schema.Types.ObjectId, ref: 'StoreCommunity', required: 'A store must belong to a store community.' },
   products: [{
     price: { type: Number, required: 'Product must have an in-store price.' },

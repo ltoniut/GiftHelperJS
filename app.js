@@ -1,4 +1,5 @@
 const express = require('express'),
+  bluebird = require("bluebird"),
   bodyParser = require('body-parser'),
   config = require("./config").config(),
   path = require('path'),
@@ -44,7 +45,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-console.log("Server.js");
+
+// Server configuration
 
 // log all requests to the console
 if (process.env.NODE_ENV !== 'test')
@@ -81,11 +83,13 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 // Request Handlers
 var handlers = {
-  city: require('./app/handlers/city'),
-  consultation: require('./app/handlers/consultation'),
-  product: require('./app/handlers/product'),
-  store: require('./app/handlers/store'),
-  storeCommunity: require('./app/handlers/storeCommunity')
+  addCity: require('./app/handlers/city/addCityHandler'),
+  addStoreCommunity: require('./app/handlers/city/addStoreCommunityHandler'),
+  addConsultation: require('./app/handlers/consultation/addConsultationHandler'),
+  addProduct: require('./app/handlers/product/addProductHandler'),
+  addStoreProduct: require('./app/handlers/store/addStoreProductHandler'),
+  changeStoreProduct: require('./app/handlers/store/changeStoreProductHandler'),
+  addStore: require('./app/handlers/storeCommunity/addStoreHandler')
 };
 
 // Application routes

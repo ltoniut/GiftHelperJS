@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  Product = require('../models/product'),
+  Product = require('./product'),
   bcrypt = require('bcrypt-nodejs'),
   config = require('../../config').config(),
   fs = require('fs'),

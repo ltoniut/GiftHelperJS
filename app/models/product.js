@@ -12,18 +12,18 @@ const ProductSchema = new Schema({
   subcategory: { type: Schema.Types.ObjectId, ref: 'Subcategory' },
   picture: {
     url: { type: String, required: 'Picture url is required.' },
-    size-horizontal: { type: Number, required: 'Picture must have horizontal and vertical sizes specified.' },
-    size-vertical: { type: Number, required: 'Picture must have horizontal and vertical sizes specified.' },
+    horizontalSize: { type: Number, required: 'Picture must have horizontal and vertical sizes specified.' },
+    verticalSize: { type: Number, required: 'Picture must have horizontal and vertical sizes specified.' },
     required: false
   },
   confirmationPending: { type: Boolean, default: true }
 });
 
-ProductSchema.methods.setPictureUrl(url) {
+ProductSchema.methods.setPictureUrl = function (url) {
   this.set('pictureUrl', url);
 }
 
-ProductSchema.methods.confirm() {
+ProductSchema.methods.confirm = function() {
   this.confirmationPending = false;
 }
 

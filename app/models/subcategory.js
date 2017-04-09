@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  Category = require('../models/category'),
+  Category = require('./category'),
   bcrypt = require('bcrypt-nodejs'),
   config = require('../../config').config(),
   fs = require('fs'),
