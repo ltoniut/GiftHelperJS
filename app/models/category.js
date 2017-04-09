@@ -11,7 +11,7 @@ const CategorySchema = new Schema({
   subcategories: [{ type: Schema.Types.ObjectId, ref: 'Subcategory' }]
 });
 
-BrandSchema.methods.addSubcategory = function (product) {
+CategorySchema.methods.addSubcategory = function (product) {
   concat(this.products, product);
 }
 

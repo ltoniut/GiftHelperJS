@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken'),
   { concat } = require('lodash');
 
 function addStoreCommunity(req, res) {
-  const city = City.findById(req.body.city);
+  const city = City.findById(req.body.city).exec(function (err, city) {
+    if (err) return handleError(err);
+  });
   const community = new StoreCommunity();
   community.name = req.body.name;
   community.description = req.body.description;

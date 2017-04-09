@@ -19,7 +19,7 @@ const StoreSchema = new Schema({
 });
 
 StoreSchema.methods.addProduct = function (product, price) {
-  concat(this.products, { price, product });
+  concat(this.products, { price: price, available: true, product: product });
 }
 
 StoreSchema.methods.removeProduct = function (product) {

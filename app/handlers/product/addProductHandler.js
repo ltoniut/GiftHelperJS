@@ -1,14 +1,17 @@
 const jwt = require('jsonwebtoken'),
-  config = require('../../config').config(),
-  errors = require('../helpers/errors'),
+  config = require('../../../config').config(),
   Product = require('../../models/product'),
   Subcategory = require('../../models/subcategory'),
   Brand = require('../../models/brand');
 
 function addProduct(req, res) {
   const product = new Product();
-  const subcategory = await Subcategory.findById(req.body.subcategory);
-  const brand = await Brand.findById(req.body.brand);
+  const subcategory = Subcategory.findById(req.body.subcategory).exec(function (err, subcategory) {
+    if (err) return handleError(err);
+  });
+  const brand = Brand.findById(req.body.brand).exec(function (err, subcategory) {
+    if (err) return handleError(err);
+  });;
   product.name = req.body.name;
   product.description = req.body.description;
   product.subcategory = subcategory;

@@ -2,14 +2,15 @@ const express = require('express'),
   bluebird = require("bluebird"),
   bodyParser = require('body-parser'),
   config = require("./config").config(),
-  path = require('path'),
+  cookieParser = require('cookie-parser'),
   favicon = require('serve-favicon'),
+  index = require('./routes/index'),
   logger = require('morgan'),
   multer = require("multer"),
   morgan = require("morgan"),
   mongoose = require("mongoose"),
-  cookieParser = require('cookie-parser'),
-  index = require('./routes/index'),
+  routes = require("./routes/routes"),
+  path = require('path'),
   users = require('./routes/users'),
   app = express();
 
@@ -88,7 +89,7 @@ var handlers = {
   addConsultation: require('./app/handlers/consultation/addConsultationHandler'),
   addProduct: require('./app/handlers/product/addProductHandler'),
   addStoreProduct: require('./app/handlers/store/addStoreProductHandler'),
-  changeStoreProduct: require('./app/handlers/store/changeStoreProductHandler'),
+  changeStoreProduct: require('./app/handlers/store/changeStoreProductPriceHandler'),
   addStore: require('./app/handlers/storeCommunity/addStoreHandler')
 };
 

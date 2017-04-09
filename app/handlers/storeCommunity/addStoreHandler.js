@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken'),
-  config = require('../../config').config(),
-  errors = require('../helpers/errors'),
+  config = require('../../../config').config(),
   Store = require('../../models/store'),
   StoreCommunity = require('../../models/storeCommunity'),
   { concat } = require('lodash');
 
 function addStore(req, res) {
-  const storeCommunity = await StoreCommunity.findById(req.body.storeCommunity);
+  const storeCommunity = StoreCommunity.findById(req.body.storeCommunity).exec(function (err, storeCommunity) {
+    if (err) return handleError(err);
+  });
   const store = new Store();
   store.name = req.body.name;
   store.community = storeCommunity;

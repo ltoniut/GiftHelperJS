@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken'),
-  config = require('../../config').config(),
-  errors = require('../helpers/errors'),
+  config = require('../../../config').config(),
   Consultation = require('../../models/city');
 
 function addConsultation(req, res) {
