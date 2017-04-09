@@ -89,7 +89,7 @@ var handlers = {
   addConsultation: require('./app/handlers/consultation/addConsultationHandler'),
   addProduct: require('./app/handlers/product/addProductHandler'),
   addStoreProduct: require('./app/handlers/store/addStoreProductHandler'),
-  changeStoreProduct: require('./app/handlers/store/changeStoreProductPriceHandler'),
+  changeStoreProductPrice: require('./app/handlers/store/changeStoreProductPriceHandler'),
   addStore: require('./app/handlers/storeCommunity/addStoreHandler')
 };
 

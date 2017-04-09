@@ -7,15 +7,13 @@ function setup(app, handlers) {
   // City Routers
   const cityRouter = express.Router();
 
-  cityRouter.post('/', handlers.addCity);
-
-  console.log("Post test");
+  cityRouter.post('/', handlers.addCity.addCity);
 
   app.use('/api/city', cityRouter);
 
   const cityCommunityRouter = express.Router();
 
-  communityRouter.post('/', handlers.addStoreCommunity)
+  cityCommunityRouter.post('/', handlers.addStoreCommunity.addStoreCommunity)
 
   app.use('/api/city/community', cityCommunityRouter);
 
@@ -23,7 +21,7 @@ function setup(app, handlers) {
 
   const consultationRouter = express.Router();
 
-  consultationRouter.post('/', handlers.addConsultation);
+  consultationRouter.post('/', handlers.addConsultation.addConsultation);
 
   app.use('/api/consultation', consultationRouter);
 
@@ -31,7 +29,7 @@ function setup(app, handlers) {
 
   const productRouter = express.Router();
 
-  productRouter.post('/', handlers.addProduct);
+  productRouter.post('/', handlers.addProduct.addProduct);
 
   app.use('/api/product', productRouter);
 
@@ -39,8 +37,8 @@ function setup(app, handlers) {
 
   const storeProductRouter = express.Router();
 
-  storeProductRouter.post('/', handlers.addStoreProduct);
-  storeProductRouter.put('/', handlers.changeStoreProductPrice);
+  storeProductRouter.post('/', handlers.addStoreProduct.addStoreProduct);
+  storeProductRouter.put('/', handlers.changeStoreProductPrice.changeStoreProductPrice);
 
   app.use('/api/store/product', storeProductRouter);
 
@@ -48,7 +46,7 @@ function setup(app, handlers) {
 
   const storeRouter = express.Router();
 
-  storeRouter.post('/', handlers.addStore);
+  storeRouter.post('/', handlers.addStore.addStore);
 
   app.use('/api/storeCommunity/store', storeRouter);
 };

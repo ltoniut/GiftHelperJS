@@ -8,9 +8,14 @@ function addCity(req, res) {
   city.communities = [];
 
   city.save(function (err) {
-   if (err) {
-     console.log(err);
-   };
+     if (err) {
+       console.log(err);
+     };
+
+    res.status(201).json({
+      message: 'City created!',
+      city: city.asJson()
+    });
   });
 }
 
