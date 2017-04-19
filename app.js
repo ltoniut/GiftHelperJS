@@ -1,4 +1,5 @@
 const express = require('express'),
+  app = express(),
   bluebird = require("bluebird"),
   bodyParser = require('body-parser'),
   config = require("./config").config(),
@@ -10,9 +11,7 @@ const express = require('express'),
   morgan = require("morgan"),
   mongoose = require("mongoose"),
   routes = require("./routes/routes"),
-  path = require('path'),
-  users = require('./routes/users'),
-  app = express();
+  path = require('path');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,14 +26,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+/* app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
-});
+}); */
 
 // error handler
 app.use(function(err, req, res, next) {
