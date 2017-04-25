@@ -4,18 +4,30 @@ const jwt = require('jsonwebtoken'),
   StoreCommunity = require('../../models/storeCommunity'),
   { concat } = require('lodash');
 
-function addStoreCommunity(req, res) {
+async function addStoreCommunity(req, res) {
   const community = new StoreCommunity();
   community.name = req.body.name;
   community.description = req.body.description;
   community.address = req.body.address;
   community.stores = [];
-  community.city = City.findById(req.body.city, (err, city) => assignCityAndSave(community, city, res));
+  //community.city = City.findById(req.body.city, (err, city) => assignCityAndSave(community, city, res));
+  community.city = await City.findById(req.body.city);
+  await City.findByIdAndUpdate(city,
+        { '$push': { 'storeCommunities': community } },
+          function(err, model) {
+            if(err) {
+              console.log(err);
+              console.log('Something wrong when adding store community!');
+              throw(err);
+            }
+          });
 
-    res.json({
-      message: 'Store community added.'
-    });
+  res.json({
+    message: 'Store community added.'
+  });
 }
+
+// Non-async alternative
 
 function assignCityAndSave(community, city, res) {
  community.city = city;

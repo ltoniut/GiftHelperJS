@@ -4,11 +4,11 @@ const jwt = require('jsonwebtoken'),
   Product = require('../../models/product'),
   { concat } = require('lodash');
 
-function addStoreProduct(req, res) {
-  const store = Store.findById(req.body.store).exec(function (err, store) {
+async function addStoreProduct(req, res) {
+  const store = await Store.findById(req.body.store).exec(function (err, store) {
     if (err) return handleError(err);
   });
-  const product = Product.findById(req.body.product).exec(function (err, product) {
+  const product = await Product.findById(req.body.product).exec(function (err, product) {
     if (err) return handleError(err);
   });
   const price = req.body.price;

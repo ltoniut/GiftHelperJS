@@ -4,18 +4,20 @@ const jwt = require('jsonwebtoken'),
   Subcategory = require('../../models/subcategory'),
   Brand = require('../../models/brand');
 
-function addProduct(req, res) {
+async function addProduct(req, res) {
   const product = new Product();
-  const subcategory = Subcategory.findById(req.body.subcategory).exec(function (err, subcategory) {
+  const subcategory = await Subcategory.findById(req.body.subcategory).exec(function (err, subcategory) {
     if (err) return handleError(err);
   });
-  const brand = Brand.findById(req.body.brand).exec(function (err, subcategory) {
+  const brand = await Brand.findById(req.body.brand).exec(function (err, subcategory) {
     if (err) return handleError(err);
-  });;
+  });
   product.name = req.body.name;
   product.description = req.body.description;
   product.subcategory = subcategory;
   product.brand = brand;
+
+  product.subc
 
   product.save(function (err) {
    if (err) {
