@@ -12,15 +12,15 @@ async function addStoreCommunity(req, res) {
   community.stores = [];
   //community.city = City.findById(req.body.city, (err, city) => assignCityAndSave(community, city, res));
   community.city = await City.findById(req.body.city);
-  await City.findByIdAndUpdate(city,
-        { '$push': { 'storeCommunities': community } },
-          function(err, model) {
-            if(err) {
-              console.log(err);
-              console.log('Something wrong when adding store community!');
-              throw(err);
-            }
-          });
+
+  console.log(community.city);
+
+  community.save(function (err) {
+     if (err) {
+       console.log(err);
+       return err;
+     };
+  });
 
   res.json({
     message: 'Store community added.'

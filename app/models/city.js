@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   StoreCommunity = require('./storeCommunity'),
   bcrypt = require('bcrypt-nodejs'),

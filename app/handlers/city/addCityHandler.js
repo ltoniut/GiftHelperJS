@@ -11,7 +11,14 @@ function addCity(req, res) {
   city.save(function (err) {
      if (err) {
        console.log(err);
+       return err;
      };
+  });
+
+  console.log('Si');
+
+  res.json({
+    message: 'City added.'
   });
 }
 

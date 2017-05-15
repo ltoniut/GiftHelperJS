@@ -2,15 +2,15 @@ const express = require('express'),
   app = express(),
   bluebird = require("bluebird"),
   bodyParser = require('body-parser'),
-  config = require("./config").config(),
+  config = require("../config").config(),
   cookieParser = require('cookie-parser'),
   favicon = require('serve-favicon'),
-  index = require('./routes/index'),
+  index = require('../routes/index'),
   logger = require('morgan'),
   multer = require("multer"),
   morgan = require("morgan"),
   mongoose = require("mongoose"),
-  routes = require("./routes/routes"),
+  routes = require("../routes/routes"),
   path = require('path');
 
 // view engine setup
@@ -82,13 +82,13 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 // Request Handlers
 var handlers = {
-  addCity: require('./app/handlers/city/addCityHandler'),
-  addStoreCommunity: require('./app/handlers/city/addStoreCommunityHandler'),
-  addConsultation: require('./app/handlers/consultation/addConsultationHandler'),
-  addProduct: require('./app/handlers/product/addProductHandler'),
-  addStoreProduct: require('./app/handlers/store/addStoreProductHandler'),
-  changeStoreProductPrice: require('./app/handlers/store/changeStoreProductPriceHandler'),
-  addStore: require('./app/handlers/storeCommunity/addStoreHandler')
+  addCity: require('./handlers/city/addCityHandler'),
+  addStoreCommunity: require('./handlers/city/addStoreCommunityHandler'),
+  addConsultation: require('./handlers/consultation/addConsultationHandler'),
+  addProduct: require('./handlers/product/addProductHandler'),
+  addStoreProduct: require('./handlers/store/addStoreProductHandler'),
+  changeStoreProductPrice: require('./handlers/store/changeStoreProductPriceHandler'),
+  addStore: require('./handlers/storeCommunity/addStoreHandler')
 };
 
 // Application routes
