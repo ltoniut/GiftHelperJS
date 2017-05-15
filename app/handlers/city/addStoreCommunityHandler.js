@@ -10,10 +10,8 @@ async function addStoreCommunity(req, res) {
   community.description = req.body.description;
   community.address = req.body.address;
   community.stores = [];
-  //community.city = City.findById(req.body.city, (err, city) => assignCityAndSave(community, city, res));
-  community.city = await City.findById(req.body.city);
 
-  console.log(community.city);
+  community.city = await City.findById(req.body.city);
 
   community.save(function (err) {
      if (err) {
@@ -21,6 +19,8 @@ async function addStoreCommunity(req, res) {
        return err;
      };
   });
+
+  await City.findByIdAndUpdate(req.body.city, { '$push': { 'storeCommunities': community } }, { new : true });
 
   res.json({
     message: 'Store community added.'
