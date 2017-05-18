@@ -83,11 +83,13 @@ app.use(express.static(path.join(__dirname, "/public")));
 // Request Handlers
 var handlers = {
   addCity: require('./handlers/city/addCityHandler'),
+  addCategory: require('./handlers/category/addCategoryHandler'),
   addStoreCommunity: require('./handlers/city/addStoreCommunityHandler'),
   addConsultation: require('./handlers/consultation/addConsultationHandler'),
   addProduct: require('./handlers/product/addProductHandler'),
   addStoreProduct: require('./handlers/store/addStoreProductHandler'),
   changeStoreProductPrice: require('./handlers/store/changeStoreProductPriceHandler'),
+  addSubcategory: require('./handlers/subcategory/addSubcategoryHandler'),
   addStore: require('./handlers/storeCommunity/addStoreHandler')
 };
 

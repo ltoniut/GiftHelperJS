@@ -25,6 +25,14 @@ function setup(app, handlers) {
 
   app.use('/api/consultation', consultationRouter);
 
+  // Category Routers
+
+  const categoryRouter = express.Router();
+
+  categoryRouter.post('/', handlers.addCategory.addCategory);
+
+  app.use('/api/category', categoryRouter);
+
   // Product Routers
 
   const productRouter = express.Router();
@@ -49,6 +57,14 @@ function setup(app, handlers) {
   storeRouter.post('/', handlers.addStore.addStore);
 
   app.use('/api/storeCommunity/store', storeRouter);
+
+  // Subcategory Routers
+
+  const subcategoryRouter = express.Router();
+
+  subcategoryRouter.post('/', handlers.addSubcategory.addSubcategory);
+
+  app.use('/api/subcategory', subcategoryRouter);
 };
 
 exports.setup = setup;

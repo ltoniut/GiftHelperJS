@@ -27,25 +27,4 @@ async function addStoreCommunity(req, res) {
   });
 }
 
-// Non-async alternative
-
-function assignCityAndSave(community, city, res) {
- community.city = city;
- City.findByIdAndUpdate(city,
-       { '$push': { 'storeCommunities': community } },
-         function(err, model) {
-           if(err) {
-             console.log(err);
-             console.log('Something wrong when adding store community!');
-             throw(err);
-           }
-         });
-
- community.save(function (err) {
-   if (err) {
-      return err;
-   };
- });
-}
-
 exports.addStoreCommunity = addStoreCommunity;
