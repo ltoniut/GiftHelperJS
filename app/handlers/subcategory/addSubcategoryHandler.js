@@ -12,21 +12,16 @@ async function addSubcategory(req, res) {
 
   var category;
 
-  /* req.body.categories.forEach(async function(categoryIndex) {
-    category = await Category.findById(categoryIndex);
-
-    subcategory.categories.add(category);
-
-    await Category.findByIdAndUpdate(categoryIndex,  { '$push': { 'subcategories': subcategory } }, { new : true });
-  }); */
-
-  await Promise.all(req.body.categories).then(categoryIndex => addCategory(subcategory, categoryIndex));
-
   subcategory.save(function (err) {
      if (err) {
        console.log(err);
        return err;
      };
+  });
+
+  await req.body.categories.forEach(async function(categoryIndex) {
+    category = await Category.findByIdAndUpdate(categoryIndex,  { '$push': { 'subcategories': subcategory } }, { new : true });
+    await Subcategory.findByIdAndUpdate(subcategory._id,  { '$push': { 'categories': category } }, { new : true });
   });
 
   res.json({
@@ -35,10 +30,10 @@ async function addSubcategory(req, res) {
 }
 
 async function addCategory(subcategory, categoryIndex) {
-  const category = await Category.findById(categoryIndex);
-  subcategory.categories.add(category);
-
-  await Category.findByIdAndUpdate(categoryIndex,  { '$push': { 'subcategories': subcategory } }, { new : true });
+  const category = await Category.findByIdAndUpdate(categoryIndex,  { '$push': { 'subcategories': subcategory } }, { new : true });
+  console.log("Name");
+  console.log(category.name);
+  subcategory.categories.push(category);
 }
 
 
