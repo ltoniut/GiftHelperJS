@@ -12,6 +12,8 @@ async function addSubcategory(req, res) {
 
   var category;
 
+  // await Promise.all(req.body.categories).then(categoryIndex => addCategory(subcategory, categoryIndex)); Only works for first value in array. Why?
+
   subcategory.save(function (err) {
      if (err) {
        console.log(err);

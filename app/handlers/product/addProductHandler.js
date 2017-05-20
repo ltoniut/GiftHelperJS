@@ -17,8 +17,6 @@ async function addProduct(req, res) {
   product.subcategory = subcategory;
   product.brand = brand;
 
-  product.subc
-
   product.save(function (err) {
    if (err) {
      console.log(err);

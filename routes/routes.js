@@ -17,6 +17,14 @@ function setup(app, handlers) {
 
   app.use('/api/city/community', cityCommunityRouter);
 
+  // Brand Routers
+
+  const brandRouter = express.Router();
+
+  brandRouter.post('/', handlers.addBrand.addBrand);
+
+  app.use('/api/brand', brandRouter);
+
   // Consultation Routers
 
   const consultationRouter = express.Router();

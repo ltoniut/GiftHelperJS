@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken'),
   StoreCommunity = require('../../models/storeCommunity'),
   { concat } = require('lodash');
 
-function addStore(req, res) {
-  const storeCommunity = StoreCommunity.findById(req.body.storeCommunity).exec(function (err, storeCommunity) {
+async function addStore(req, res) {
+  const storeCommunity = await StoreCommunity.findById(req.body.storeCommunity).exec(function (err, storeCommunity) {
     if (err) return handleError(err);
   });
   const store = new Store();
@@ -20,7 +20,11 @@ function addStore(req, res) {
    };
   });
 
-  concat(storeCommunity.stores, store);
+  await StoreCommunity.findByIdAndUpdate(storeCommunity._id,  { '$push': { 'stores': store } }, { new : true });
+
+  res.json({
+    message: 'Store added.'
+  });
 }
 
 exports.addStore = addStore;
