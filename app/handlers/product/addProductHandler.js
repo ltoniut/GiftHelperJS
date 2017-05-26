@@ -12,6 +12,8 @@ async function addProduct(req, res) {
   const brand = await Brand.findById(req.body.brand).exec(function (err, subcategory) {
     if (err) return handleError(err);
   });
+
+  product.picture = { "url": req.body.pictureUrl, "horizontalSize": req.body.pictureHorizontalSize, "verticalSize": req.body.pictureVerticalSize };
   product.name = req.body.name;
   product.description = req.body.description;
   product.subcategory = subcategory;
@@ -23,7 +25,12 @@ async function addProduct(req, res) {
    };
   });
 
-  concat(brand.products, product);
+  await Brand.findByIdAndUpdate(req.body.brand,  { '$push': { 'products': product } }, { new : true });
+  await Subcategory.findByIdAndUpdate(req.body.subcategory,  { '$push': { 'products': product } }, { new : true });
+
+  res.json({
+    message: 'Product added.'
+  });
 }
 
 exports.addProduct = addProduct;
