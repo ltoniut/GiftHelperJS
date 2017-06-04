@@ -1,21 +1,9 @@
-/*import webpack from 'webpack';
-import path from "path";
+const { resolve } = require('path');
 
-const port = 8080;
-
-module.exports = {
-  entry: './app.js',
-  node: {
-     fs: "empty",
-     net: "empty"
-  }
-};*/
-
-const { resolve } = require('path'),
-  webpack = require('webpack'),
-  ExtractTextPlugin = require('extract-text-webpack-plugin'),
-  CopyWebpackPlugin = require('copy-webpack-plugin'),
-  OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 const config = {
   devtool: 'cheap-module-eval-source-map',
@@ -24,7 +12,8 @@ const config = {
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    './app.js'
+    './main.js',
+    './assets/scss/main.scss',
   ],
 
   output: {

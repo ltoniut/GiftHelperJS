@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken'),
   config = require('../config').config(),
-  Brand = require('../handlers/models/brand'),
-  Subcategory = require('../handlers/models/subcategory'),
-  React = require('react');
+  Brand = require('../app/models/brand'),
+  Subcategory = require('../app/models/subcategory'),
+  React = require('react'),
+  ReactDOM = require('react-dom');
 
 class BrandForm extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class BrandForm extends React.Component {
   }
 
   render() {
-    return (
+    return ReactDOM.render(
       <form>
         <label>
           Name:
@@ -43,3 +44,5 @@ class BrandForm extends React.Component {
     );
   }
 }
+
+exports.BrandForm = BrandForm;
