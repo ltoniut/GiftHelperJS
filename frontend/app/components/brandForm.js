@@ -1,11 +1,8 @@
 const jwt = require('jsonwebtoken'),
-  config = require('../config').config(),
-  Brand = require('../app/models/brand'),
-  Subcategory = require('../app/models/subcategory'),
   React = require('react'),
   ReactDOM = require('react-dom');
 
-class BrandForm extends React.Component {
+export default class BrandForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {nameValue: '', descriptionValue: ''};
@@ -30,17 +27,20 @@ class BrandForm extends React.Component {
   }
 
   render() {
-    return ReactDOM.render(
-      <form>
-        <label>
-          Name:
-          <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
-        </label><br />
-        <label>
-          Description:
-          <input type="text" value={this.state.descriptionValue} onChange={this.handleDescriptionChange} />
-        </label>
-      </form>
+    return (
+      <div>
+        <h2>Brand Form</h2>
+        <form id='form'>
+          <label>
+            Name:
+            <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
+          </label><br />
+          <label>
+            Description:
+            <input type="text" value={this.state.descriptionValue} onChange={this.handleDescriptionChange} />
+          </label>
+        </form>
+      </div>
     );
   }
 }

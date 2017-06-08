@@ -1,30 +1,13 @@
-import react from 'React';
-
-class App extends React.Component {
-
-  state = {
-    subcategories: [],
-    brands: []
-  };
-
-  render () {
-    return (
-      <div>
-        <ProductForm
-          brands={this.state.brands}
-          subcategories={this.state.subcategories}
-        />
-        <BrandForm />
-        <SubcategoryForm />
-      </div>
-    );
-  }
-}
+const jwt = require('jsonwebtoken'),
+  React = require('react');
 
 export default class ProductForm extends React.Component {
-  state = {
-    nameValue: '', descriptionValue: '', brandValue: '', subcategoryValue: ''
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      nameValue: '', descriptionValue: '', brandValue: '', subcategoryValue: ''
+    };
+  }
 
   handleNameChange = (event) => {
    this.setState({nameValue: event.target.value});
@@ -69,24 +52,27 @@ export default class ProductForm extends React.Component {
 
   render() {
     return (
-      <form>
-        <label>
-          Name:
-          <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
-        </label><br />
-        <label>
-          Description:
-          <input type="text" value={this.state.descriptionValue} onChange={this.handleDescriptionChange} />
-        </label><br />
-        <label>
-          Subcategory:
-          {this.renderSubcategory()}
-        </label><br />
-        <label>
-          Brand:
-          {this.renderBrand()}
-        </label>
-      </form>
+      <div>
+        <h2>Product Form</h2>
+        <form>
+          <label>
+            Name:
+            <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
+          </label><br />
+          <label>
+            Description:
+            <input type="text" value={this.state.descriptionValue} onChange={this.handleDescriptionChange} />
+          </label><br />
+          <label>
+            Subcategory:
+            {this.renderSubcategory()}
+          </label><br />
+          <label>
+            Brand:
+            {this.renderBrand()}
+          </label>
+        </form>
+      </div>
     );
   }
 }
