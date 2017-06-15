@@ -2,13 +2,27 @@ import React, { Component } from 'react';
 import BrandForm from './brandForm';
 import ProductForm from './productForm';
 import SubcategoryForm from './subcategoryForm';
+import { getJson } from '../vendors/vendor';
+const urls = require('../vendors/urls.json');
 
 export default class App extends Component {
-  state = {
-    subcategories: [],
-    brands: [],
-    categories: []
-  };
+  constructor(props) {
+    super(props);
+
+    //var Httpreq = new XMLHttpRequest(); // a new request
+    //Httpreq.open("GET",'http://localhost:8085/api/brand',false);
+    //Httpreq.send(null);
+
+    var brandResponse = getJson(urls.brand);
+    var subcategoryResponse = getJson(urls.subcategory);
+    var categoryResponse = getJson(urls.category);
+
+    this.state = {
+      subcategories: subcategoryResponse,
+      brands: brandResponse,
+      categories: categoryResponse
+    };
+  }
 
   render() {
     return (
@@ -19,7 +33,7 @@ export default class App extends Component {
           subcategories={this.state.subcategories}
         />
         <SubcategoryForm
-        categories={this.state.categories}
+          categories={this.state.categories}
         />
       </div>
     );

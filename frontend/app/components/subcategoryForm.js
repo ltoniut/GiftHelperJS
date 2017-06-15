@@ -23,11 +23,12 @@ export default class SubcategoryForm extends React.Component {
 
   createCategorySelector() {
     const categories = this.props.categories;
+
     var returnValue = new SelectBox(
     {
       label: "Categories",
       onChange: this.handleChange,
-      value: this.props.categories,
+      value: categories,
       multiple: true
     });
 
@@ -38,6 +39,8 @@ export default class SubcategoryForm extends React.Component {
         label: option.name
       });
     });
+
+    return returnValue;
   }
 
   render() {

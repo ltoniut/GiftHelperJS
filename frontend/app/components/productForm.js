@@ -26,7 +26,7 @@ export default class ProductForm extends React.Component {
   }
 
   handleSubmit = (event) => {
-    alert('A subcategory was submitted: ' + this.state.nameValue);
+    alert('A product was submitted: ' + this.state.nameValue);
     event.preventDefault();
   }
 

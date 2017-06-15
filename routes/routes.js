@@ -22,6 +22,7 @@ function setup(app, handlers) {
   const brandRouter = express.Router();
 
   brandRouter.post('/', handlers.addBrand.addBrand);
+  brandRouter.get('/', handlers.getBrands.getBrands);
 
   app.use('/api/brand', brandRouter);
 
@@ -38,6 +39,7 @@ function setup(app, handlers) {
   const categoryRouter = express.Router();
 
   categoryRouter.post('/', handlers.addCategory.addCategory);
+  categoryRouter.get('/', handlers.getCategories.getCategories);
 
   app.use('/api/category', categoryRouter);
 
@@ -71,6 +73,7 @@ function setup(app, handlers) {
   const subcategoryRouter = express.Router();
 
   subcategoryRouter.post('/', handlers.addSubcategory.addSubcategory);
+  subcategoryRouter.get('/', handlers.getSubcategories.getSubcategories);
 
   app.use('/api/subcategory', subcategoryRouter);
 };
