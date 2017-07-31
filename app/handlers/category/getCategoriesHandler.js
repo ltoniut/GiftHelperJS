@@ -5,6 +5,10 @@ const jwt = require('jsonwebtoken'),
 async function getCategories(req, res) {
   const categories = await Category.find();
 
+  categories.sort(function (a, b) {
+    return a.name.localeCompare(b.name);
+  });
+
   res.json(categories);
 }
 

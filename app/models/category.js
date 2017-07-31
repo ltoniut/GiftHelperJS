@@ -7,7 +7,7 @@ const mongoose = require('mongoose'),
   { concat } = require('lodash');
 
 const CategorySchema = new Schema({
-  name: { type: String, required: 'Category name is required.', unique: false, maxlength: [70, 'Category name should have at most 70 characters.'] },
+  name: { type: String, required: 'Category name is required.', unique: true, maxlength: [70, 'Category name should have at most 70 characters.'] },
   subcategories: [{ type: Schema.Types.ObjectId, ref: 'Subcategory' }]
 });
 

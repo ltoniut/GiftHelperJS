@@ -1,46 +1,46 @@
 const jwt = require('jsonwebtoken'),
   React = require('react'),
-  SelectBox = require('react-select-box');
+  urls = require('../vendors/urls.json');
+import { postJson } from '../vendors/vendor';
 
 export default class SubcategoryForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {nameValue: '', categories: []};
-
-    this.handleNameChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      nameValue: '', categories: []
+    };
   }
 
-  handleChange(event) {
-    this.setState({nameValue: event.target.nameValue});
-    this.setState({categories: event.target.categories});
+  handleNameChange = (event) => {
+    this.setState({nameValue: event.target.value});
   }
 
-  handleSubmit(event) {
+  handleCategoriesChange = (event) => {
+    var options = event.target.options;
+
+    for (var i = 0, l = this.props.categories.length; i < l; i++) {
+      if (options[i].selected) {
+        this.state.categories.push(options[i].value)
+      }
+    }
+  }
+
+  handleSubmit = (event) => {
+
+    const subcategoryData = { "name": this.state.nameValue, "categories": this.state.categories };
+    postJson(urls.subcategory, subcategoryData);
     alert('A subcategory was submitted: ' + this.state.nameValue);
     event.preventDefault();
   }
 
-  createCategorySelector() {
-    const categories = this.props.categories;
-
-    var returnValue = new SelectBox(
-    {
-      label: "Categories",
-      onChange: this.handleChange,
-      value: categories,
-      multiple: true
-    });
-
-    returnValue.options = [];
-
-    categories.forEach(function (option) {
-      returnValue.options.push({value: option._id,
-        label: option.name
-      });
-    });
-
-    return returnValue;
+  renderCategories() {
+    return (
+      <select value={this.state.categories} onChange={this.handleCategoriesChange} size="15" multiple>
+        {this.props.categories.map((category) => (
+          <option value={category._id}>{category.name}</option>
+        ))}
+      </select>
+    )
   }
 
   render() {
@@ -48,14 +48,15 @@ export default class SubcategoryForm extends React.Component {
       <div>
         <h2>Subcategory Form</h2>
         <form>
-          <label>
-            Name:
-            <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
-          </label><br />
-          <label>
-            Categories:
-            { this.createCategorySelector }
-          </label>
+          <span>
+            Name: <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
+          </span><br />
+          <span>
+            Categories: { this.renderCategories() }
+          </span><br />
+          <span>
+            <input type="button" value="Submit" onClick={this.handleSubmit} />
+          </span>
         </form>
       </div>
     );

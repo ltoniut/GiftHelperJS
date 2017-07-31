@@ -11,9 +11,9 @@ const ProductSchema = new Schema({
   brand: { type: Schema.Types.ObjectId, ref: 'Brand' },
   subcategory: { type: Schema.Types.ObjectId, ref: 'Subcategory' },
   picture: {
-    url: { type: String, required: 'Picture url is required.' },
-    horizontalSize: { type: Number, required: 'Picture must have horizontal and vertical sizes specified.' },
-    verticalSize: { type: Number, required: 'Picture must have horizontal and vertical sizes specified.' },
+    url: { type: String, required: false },
+    horizontalSize: { type: Number, required: false },
+    verticalSize: { type: Number, required: false },
     required: false
   },
   confirmationPending: { type: Boolean, default: true }

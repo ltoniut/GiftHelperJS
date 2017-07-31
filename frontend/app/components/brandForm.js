@@ -1,28 +1,27 @@
 const jwt = require('jsonwebtoken'),
   React = require('react'),
-  ReactDOM = require('react-dom');
+  ReactDOM = require('react-dom'),
+  urls = require('../vendors/urls.json');
+import { postJson } from '../vendors/vendor';
 
 export default class BrandForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {nameValue: '', descriptionValue: ''};
-
-    this.handleChanges = this.handleChanges.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChanges(event) {
-   this.setState({nameValue: event.target.nameValue});
-   this.setState({descriptionValue: event.target.descriptionValue});
+  handleNameChange = (event) => {
+   this.setState({nameValue: event.target.value});
   }
 
-  handleSubmit(event) {
-    alert('A subcategory was submitted: ' + this.state.nameValue);
-    event.preventDefault();
+  handleDescriptionChange = (event) => {
+   this.setState({descriptionValue: event.target.value});
   }
 
-  handleSubmit(event) {
-    alert('A subcategory was submitted: ' + this.state.nameValue);
+  handleSubmit = (event) => {
+    const brandData = { "name": this.state.nameValue, "description": this.state.description };
+    postJson(urls.brand, brandData);
+    alert('A brand was submitted: ' + this.state.nameValue);
     event.preventDefault();
   }
 
@@ -31,14 +30,15 @@ export default class BrandForm extends React.Component {
       <div>
         <h2>Brand Form</h2>
         <form id='form'>
-          <label>
-            Name:
-            <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
-          </label><br />
-          <label>
-            Description:
-            <input type="text" value={this.state.descriptionValue} onChange={this.handleDescriptionChange} />
-          </label>
+          <span>
+            Name: <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
+          </span><br />
+          <span>
+            Description: <input type="text" value={this.state.descriptionValue} onChange={this.handleDescriptionChange} />
+          </span><br />
+          <span>
+            <input type="button" value="Submit" onClick={this.handleSubmit} />
+          </span>
         </form>
       </div>
     );

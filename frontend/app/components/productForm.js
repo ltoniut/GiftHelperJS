@@ -26,6 +26,11 @@ export default class ProductForm extends React.Component {
   }
 
   handleSubmit = (event) => {
+    const productData = { "name": this.state.nameValue,
+    "subcategory": this.state.subcategoryValue,
+    "brand": this.state.brandValue,
+    "description": this.state.descriptionValue };
+    postJson(urls.product, productData);
     alert('A product was submitted: ' + this.state.nameValue);
     event.preventDefault();
   }
@@ -55,22 +60,21 @@ export default class ProductForm extends React.Component {
       <div>
         <h2>Product Form</h2>
         <form>
-          <label>
-            Name:
-            <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
-          </label><br />
-          <label>
-            Description:
-            <input type="text" value={this.state.descriptionValue} onChange={this.handleDescriptionChange} />
-          </label><br />
-          <label>
-            Subcategory:
-            {this.renderSubcategory()}
-          </label><br />
-          <label>
-            Brand:
-            {this.renderBrand()}
-          </label>
+          <span>
+            Name: <input type="text" value={this.state.nameValue} onChange={this.handleNameChange} />
+          </span><br />
+          <span>
+            Description: <input type="text" value={this.state.descriptionValue} onChange={this.handleDescriptionChange} />
+          </span><br />
+          <span>
+            Subcategory: {this.renderSubcategory()}
+          </span><br />
+          <span>
+            Brand: {this.renderBrand()}
+          </span><br />
+          <span>
+            <input type="button" value="Submit" onClick={this.handleSubmit} />
+          </span>
         </form>
       </div>
     );
